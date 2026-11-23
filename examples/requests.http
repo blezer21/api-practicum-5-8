@@ -1,0 +1,69 @@
+### Готовые запросы (VS Code REST Client / JetBrains HTTP Client; в Postman — те же URL и тела)
+@host = http://localhost:3000
+# Для Prism mock: @host = http://127.0.0.1:4010
+
+### ─── №5 REST: список контактов
+GET {{host}}/api/contacts
+
+### Поиск
+GET {{host}}/api/contacts?search=иван
+
+### Создать контакт
+POST {{host}}/api/contacts
+Content-Type: application/json
+
+{ "name": "Олег Ковалёв", "mobile": "+7 903 444-55-66", "email": "oleg@example.com" }
+
+### Частично изменить (подставьте id)
+PATCH {{host}}/api/contacts/ID
+Content-Type: application/json
+
+{ "note": "Коллега" }
+
+### Удалить
+DELETE {{host}}/api/contacts/ID
+
+### ─── №6 Магазин игр
+GET {{host}}/api/games?genre=rpg&platform=pc
+
+### Добавить игру
+POST {{host}}/api/games
+Content-Type: application/json
+
+{ "title": "Пиксельный рыцарь", "genre": "indie", "platforms": ["pc", "switch"], "price": 499, "stock": 30, "releaseYear": 2026 }
+
+### Купить игру
+POST {{host}}/api/games/ID/orders
+Content-Type: application/json
+
+{ "quantity": 1 }
+
+### ─── №7 GraphQL
+POST {{host}}/graphql
+Content-Type: application/json
+
+{ "query": "{ books { id name genre author { name } } }" }
+
+### GraphQL-мутация с переменными
+POST {{host}}/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation($input: BookInput!) { addBook(input: $input) { id name author { name } } }",
+  "variables": { "input": { "name": "Война и мир", "genre": "Роман", "authorName": "Толстой Лев Николаевич" } }
+}
+
+### ─── №8 gRPC через HTTP-шлюз
+GET {{host}}/rpc/tasks?date=2026-11-23
+
+### Создать задачу (rpc CreateTask)
+POST {{host}}/rpc/tasks
+Content-Type: application/json
+
+{ "title": "Повторить gRPC", "date": "2026-11-23", "time": "19:00", "priority": "HIGH" }
+
+### Отметить выполненной (rpc UpdateTask)
+PATCH {{host}}/rpc/tasks/ID
+Content-Type: application/json
+
+{ "done": true }

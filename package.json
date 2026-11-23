@@ -1,0 +1,31 @@
+{
+  "name": "api-practicum-5-8",
+  "version": "1.0.0",
+  "description": "Практические работы 5–8 по дисциплине «Интерфейсы прикладного программирования»: REST, OpenAPI, GraphQL, gRPC на одном сайте",
+  "private": true,
+  "main": "server/index.js",
+  "engines": {
+    "node": ">=22.9.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "dev": "node --watch --env-file-if-exists=.env server/index.js",
+    "mock": "prism mock docs/openapi.yaml --host 127.0.0.1 --port 4010",
+    "grpc:server": "node --env-file-if-exists=.env server/grpc/standalone.js",
+    "grpc:client": "node scripts/grpc-client.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.0",
+    "@grpc/proto-loader": "^0.7.13",
+    "express": "^5.1.0",
+    "graphql": "^16.9.0",
+    "mongodb": "^6.10.0",
+    "redoc": "^2.4.0",
+    "swagger-ui-dist": "^5.18.0",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@stoplight/prism-cli": "^5.12.0"
+  }
+}

@@ -1,0 +1,73 @@
+"""
+Практическая работа №7, вариант 1 — библиотека книг.
+Обязательные поля из задания: id, name (название книги), genre (жанр),
+name автора (ФИО). Остальные поля добавлены самостоятельно.
+"""
+type Book {
+  "Уникальный идентификатор книги"
+  id: ID!
+  "Название книги"
+  name: String!
+  "Жанр книги"
+  genre: String!
+  "Год издания"
+  year: Int
+  "Количество страниц"
+  pages: Int
+  "Есть ли книга в наличии в библиотеке"
+  available: Boolean!
+  "Автор книги (вложенный объект — главное преимущество графовой модели)"
+  author: Author!
+  createdAt: String!
+}
+
+type Author {
+  id: ID!
+  "ФИО автора книги"
+  name: String!
+  country: String
+  "Все книги этого автора"
+  books: [Book!]!
+  bookCount: Int!
+}
+
+type Query {
+  "Список книг с необязательными фильтрами"
+  books(genre: String, authorId: ID, search: String): [Book!]!
+  "Одна книга по идентификатору"
+  book(id: ID!): Book
+  authors: [Author!]!
+  author(id: ID!): Author
+  "Все жанры, которые есть в библиотеке"
+  genres: [String!]!
+}
+
+input BookInput {
+  name: String!
+  genre: String!
+  year: Int
+  pages: Int
+  available: Boolean
+  "Существующий автор…"
+  authorId: ID
+  "…или ФИО нового автора (будет создан автоматически)"
+  authorName: String
+}
+
+input BookUpdateInput {
+  name: String
+  genre: String
+  year: Int
+  pages: Int
+  available: Boolean
+  authorId: ID
+  authorName: String
+}
+
+type Mutation {
+  addBook(input: BookInput!): Book!
+  updateBook(id: ID!, input: BookUpdateInput!): Book!
+  deleteBook(id: ID!): Boolean!
+  addAuthor(name: String!, country: String): Author!
+  deleteAuthor(id: ID!): Boolean!
+}

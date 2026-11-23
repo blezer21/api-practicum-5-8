@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameStore API · ReDoc</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; background: #fff; color: #222; }
+    .topbar { display: flex; gap: 20px; align-items: center; padding: 12px 24px; background: #1b1d3a; color: #fff; font: 14px system-ui, sans-serif; }
+    .topbar a { color: #c8cbff; text-decoration: none; }
+    .topbar a:hover { color: #fff; }
+    .topbar b { margin-right: auto; }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <b>Практическая №6 · ReDoc</b>
+    <a href="/#06">← К сайту</a>
+    <a href="/swagger">Swagger UI</a>
+    <a href="/openapi.yaml">openapi.yaml</a>
+  </nav>
+  <redoc spec-url="/openapi.yaml" disable-google-font="true" expand-responses="200,201" path-in-middle-panel="true"></redoc>
+  <script src="/docs/redoc.standalone.js"></script>
+</body>
+</html>

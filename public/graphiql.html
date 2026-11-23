@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Библиотека · GraphiQL</title>
+  <link rel="stylesheet" href="https://unpkg.com/graphiql@3.7.1/graphiql.min.css">
+  <style>
+    :root { color-scheme: light; }
+    html, body { height: 100%; margin: 0; background: #fff; }
+    body { display: flex; flex-direction: column; }
+    .topbar { display: flex; gap: 20px; align-items: center; padding: 10px 20px; background: #1b1d3a; color: #fff; font: 14px system-ui, sans-serif; }
+    .topbar a { color: #c8cbff; text-decoration: none; }
+    .topbar b { margin-right: auto; }
+    #graphiql { flex: 1; min-height: 0; }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <b>Практическая №7 · GraphiQL</b>
+    <a href="/#07">← К сайту</a>
+    <a href="/graphql/schema">Схема SDL</a>
+  </nav>
+  <div id="graphiql">Загрузка GraphiQL…</div>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/graphiql@3.7.1/graphiql.min.js" crossorigin></script>
+  <script>
+    const fetcher = GraphiQL.createFetcher({ url: '/graphql' });
+    const defaultQuery = `# Библиотека книг. Ctrl+Enter — выполнить запрос.
+query AllBooks {
+  books {
+    id
+    name
+    genre
+    author {
+      name
+    }
+  }
+}
+
+# Пример мутации:
+# mutation {
+#   addBook(input: { name: "Война и мир", genre: "Роман", authorName: "Толстой Лев Николаевич" }) {
+#     id
+#     name
+#     author { id name }
+#   }
+# }
+`;
+    ReactDOM.createRoot(document.getElementById('graphiql')).render(
+      React.createElement(GraphiQL, { fetcher, defaultQuery, defaultEditorToolsVisibility: true, forcedTheme: "light" }),
+    );
+  </script>
+</body>
+</html>

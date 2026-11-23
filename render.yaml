@@ -1,0 +1,17 @@
+# Render Blueprint: один Web Service (сайт + REST + GraphQL + gRPC внутри процесса).
+services:
+  - type: web
+    name: api-practicum
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: MONGODB_DB
+        value: api_practicum
+      # Для постоянного хранения добавьте в Render → Environment переменную
+      # MONGODB_URI (например, из MongoDB Atlas). Без неё данные лежат в JSON-файле
+      # и сбрасываются к демонстрационным при каждом перезапуске сервиса.

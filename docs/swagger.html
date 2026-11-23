@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GameStore API · Swagger UI</title>
+  <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; background: #fff; color: #222; }
+    .topbar { display: flex; gap: 20px; align-items: center; padding: 12px 24px; background: #1b1d3a; color: #fff; font: 14px system-ui, sans-serif; }
+    .topbar a { color: #c8cbff; text-decoration: none; }
+    .topbar a:hover { color: #fff; }
+    .topbar b { margin-right: auto; }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <b>Практическая №6 · Swagger UI (Try it out)</b>
+    <a href="/#06">← К сайту</a>
+    <a href="/docs">ReDoc</a>
+    <a href="/openapi.yaml">openapi.yaml</a>
+  </nav>
+  <div id="swagger"></div>
+  <script src="/swagger-ui/swagger-ui-bundle.js"></script>
+  <script>
+    SwaggerUIBundle({ url: '/openapi.json', dom_id: '#swagger', deepLinking: true, tryItOutEnabled: true });
+  </script>
+</body>
+</html>

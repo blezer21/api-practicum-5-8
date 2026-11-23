@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Практикум 5–8</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%235b5bd6'/><text x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='white' text-anchor='middle'>{}</text></svg>">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="#05">
+        <span class="brand-mark">{ }</span>
+        <span>API<b>практикум</b></span>
+      </a>
+      <div class="side-label">Практические работы</div>
+      <nav class="nav">
+        <a href="#05" data-tab="05"><span class="num">05</span><span><b>Телефонный справочник</b><small>REST · CRUD</small></span></a>
+        <a href="#06" data-tab="06"><span class="num">06</span><span><b>Магазин игр</b><small>OpenAPI · ReDoc · Prism</small></span></a>
+        <a href="#07" data-tab="07"><span class="num">07</span><span><b>Библиотека книг</b><small>GraphQL</small></span></a>
+        <a href="#08" data-tab="08"><span class="num">08</span><span><b>Задачи на день</b><small>gRPC</small></span></a>
+      </nav>
+      <div class="side-footer">
+        <div class="status"><i id="status-dot"></i><span id="status-text">Проверка сервера…</span></div>
+        <small>Node.js · Express · GraphQL · gRPC</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- ───────────── 05 ───────────── -->
+      <section class="page" data-page="05">
+        <header class="page-head">
+          <div>
+            <div class="eyebrow">Практическая работа 05 <span>/ REST API</span></div>
+            <h1>Телефонный справочник</h1>
+            <p class="lead">CRUD-приложение: Express + REST, данные в MongoDB или JSON-файле.</p>
+          </div>
+          <button class="btn primary" id="contact-add">+ Новый контакт</button>
+        </header>
+
+        <div class="card">
+          <div class="toolbar">
+            <input class="search" id="contact-search" type="search" placeholder="Поиск по имени, телефону или почте">
+            <span class="muted" id="contact-count"></span>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Имя</th><th>Мобильный</th><th>Домашний</th><th>Почта</th><th></th></tr></thead>
+              <tbody id="contact-rows"></tbody>
+            </table>
+          </div>
+          <div class="empty" id="contact-empty" hidden>Контактов пока нет.</div>
+        </div>
+        <div class="endpoints">
+          <code>GET /api/contacts</code><code>GET /api/contacts/:id</code><code>POST /api/contacts</code>
+          <code>PUT /api/contacts/:id</code><code>PATCH /api/contacts/:id</code><code>DELETE /api/contacts/:id</code>
+        </div>
+        <div class="log" data-log="05"></div>
+      </section>
+
+      <!-- ───────────── 06 ───────────── -->
+      <section class="page" data-page="06" hidden>
+        <header class="page-head">
+          <div>
+            <div class="eyebrow">Практическая работа 06 <span>/ OpenAPI</span></div>
+            <h1>Магазин компьютерных игр</h1>
+            <p class="lead">API спроектирован по спецификации OpenAPI 3.0, задокументирован в ReDoc и имитируется через Prism.</p>
+          </div>
+          <button class="btn primary" id="game-add">+ Новая игра</button>
+        </header>
+
+        <div class="doc-links">
+          <a class="doc-link" href="/docs" target="_blank"><b>ReDoc</b><small>Документация API</small></a>
+          <a class="doc-link" href="/swagger" target="_blank"><b>Swagger UI</b><small>Try it out</small></a>
+          <a class="doc-link" href="/openapi.yaml" target="_blank"><b>openapi.yaml</b><small>Спецификация</small></a>
+          <div class="doc-link mono"><b>npm run mock</b><small>Prism → 127.0.0.1:4010</small></div>
+        </div>
+
+        <div class="card">
+          <div class="toolbar wrap">
+            <input class="search" id="game-search" type="search" placeholder="Поиск по названию">
+            <select id="game-genre"><option value="">Все жанры</option></select>
+            <select id="game-platform"><option value="">Все платформы</option></select>
+            <label class="source">
+              Источник:
+              <select id="game-source">
+                <option value="">Сервер (Express)</option>
+                <option value="http://127.0.0.1:4010">Prism mock :4010</option>
+              </select>
+            </label>
+          </div>
+          <div class="grid" id="game-grid"></div>
+          <div class="empty" id="game-empty" hidden>Игр не найдено.</div>
+        </div>
+        <div class="log" data-log="06"></div>
+      </section>
+
+      <!-- ───────────── 07 ───────────── -->
+      <section class="page" data-page="07" hidden>
+        <header class="page-head">
+          <div>
+            <div class="eyebrow">Практическая работа 07 <span>/ GraphQL · вариант 1</span></div>
+            <h1>Библиотека книг</h1>
+            <p class="lead">Схема на SDL, сервер на graphql-js, клиент отправляет настоящие запросы и мутации в <code>POST /graphql</code>.</p>
+          </div>
+          <div class="head-actions">
+            <a class="btn" href="/graphiql" target="_blank">GraphiQL</a>
+            <a class="btn" href="/graphql/schema" target="_blank">Схема SDL</a>
+            <button class="btn primary" id="book-add">+ Новая книга</button>
+          </div>
+        </header>
+
+        <div class="split">
+          <div class="card">
+            <div class="toolbar wrap">
+              <input class="search" id="book-search" type="search" placeholder="Поиск по названию">
+              <div class="chips" id="book-genres"></div>
+            </div>
+            <div class="books" id="book-list"></div>
+            <div class="empty" id="book-empty" hidden>Книг не найдено.</div>
+          </div>
+          <div class="side-col">
+            <div class="card pad">
+              <h3>Авторы</h3>
+              <ul class="authors" id="author-list"></ul>
+            </div>
+            <div class="card pad">
+              <h3>Выбор полей</h3>
+              <p class="muted small">GraphQL возвращает только запрошенные поля. Отметьте поля книги — запрос пересоберётся.</p>
+              <div class="checks" id="book-fields"></div>
+            </div>
+          </div>
+        </div>
+        <div class="log" data-log="07"></div>
+      </section>
+
+      <!-- ───────────── 08 ───────────── -->
+      <section class="page" data-page="08" hidden>
+        <header class="page-head">
+          <div>
+            <div class="eyebrow">Практическая работа 08 <span>/ gRPC · вариант 3</span></div>
+            <h1>Задачи на день</h1>
+            <p class="lead">Сервис <code>planner.TaskService</code> на gRPC (HTTP/2 + Protobuf). Браузер → HTTP-шлюз → gRPC-клиент → gRPC-сервер.</p>
+          </div>
+          <a class="btn" href="/rpc/proto" target="_blank">tasks.proto</a>
+        </header>
+
+        <div class="card pad">
+          <div class="day-bar">
+            <button class="btn icon" id="day-prev" title="Предыдущий день">‹</button>
+            <input type="date" id="day-date">
+            <button class="btn icon" id="day-next" title="Следующий день">›</button>
+            <button class="btn ghost" id="day-today">Сегодня</button>
+            <label class="toggle"><input type="checkbox" id="day-pending"> только невыполненные</label>
+            <div class="progress" title="GetDayStats"><div class="progress-bar" id="day-progress"></div></div>
+            <span class="muted" id="day-stats"></span>
+          </div>
+          <form class="task-form" id="task-form">
+            <input name="title" placeholder="Что нужно сделать?" required maxlength="150">
+            <input name="time" type="time">
+            <select name="priority">
+              <option value="LOW">Низкий</option>
+              <option value="MEDIUM" selected>Средний</option>
+              <option value="HIGH">Высокий</option>
+            </select>
+            <button class="btn primary">Добавить</button>
+          </form>
+          <ul class="tasks" id="task-list"></ul>
+          <div class="empty" id="task-empty" hidden>На этот день задач нет.</div>
+        </div>
+        <div class="flow">
+          <span>Браузер</span><i>fetch /rpc/tasks</i><span>HTTP-шлюз (Express)</span><i>gRPC-клиент</i><span>TaskService :50051</span><i></i><span>Хранилище</span>
+        </div>
+        <div class="log" data-log="08"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="modal">
+    <form method="dialog" id="modal-form">
+      <h2 id="modal-title"></h2>
+      <div id="modal-fields" class="fields"></div>
+      <p class="error" id="modal-error"></p>
+      <div class="modal-actions">
+        <button class="btn" value="cancel" formnovalidate>Отмена</button>
+        <button class="btn primary" value="ok" id="modal-ok">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
